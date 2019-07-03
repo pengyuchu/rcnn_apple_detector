@@ -3,7 +3,7 @@
 import rospy
 from std_msgs.msg import String
 import roslib
-roslib.load_manifest('detector')
+roslib.load_manifest('rcnn_apple_detector')
 import sys
 import cv2
 from std_msgs.msg import String
@@ -19,7 +19,7 @@ class InferenceConfig(apple_detection_mask_rcnn.BalloonConfig):
     # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
-    DETECTION_MIN_CONFIDENCE = 0.7
+    DETECTION_MIN_CONFIDENCE = 0.8
 
 config = InferenceConfig()
 config.display()
@@ -42,28 +42,42 @@ import matplotlib.pyplot as plt
 
 # Local path to trained weights file
 MODEL_DIR = 'weights/'
-COCO_MODEL_PATH = MODEL_DIR +'mask_rcnn_apple_0008.h5'
+MODEL_NAME = 'model.h5'
+MODEL_PATH = MODEL_DIR + MODEL_NAME
 # Create model object in inference mode.
 model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
 # Load weights trained on MS-COCO
-model.load_weights(COCO_MODEL_PATH, by_name=True, exclude=["mrcnn_bbox"])
+# model.load_weights(COCO_MODEL_PATH, by_name=True, exclude=["mrcnn_bbox"])
+model.load_weights(MODEL_PATH, by_name=True, exclude=["mrcnn_bbox"])
 # for online service (clear the last session)
 model.keras_model._make_predict_function()
 class_names = ['bg', ' ']
 
 
+import matplotlib
+import matplotlib.pyplot as plt
+# for the server without display
+plt.switch_backend('agg')
+
 def detect(img):
     start = time.time()
     results = model.detect([img], verbose=0) # 1: display log information
+    print('results length: ', len(results))
     r = results[0]    
     print('\nResult: ----------------')
     duration = time.time() - start;
     print('The detection time is: %.2fs' % (duration))
-    # print('The count of apples is ', len(r['class_ids']))
+    print('The count of apples is ', len(r['class_ids']))]
+    # masked_image = visualize.save_instances(img, r['rois'], r['masks'], r['class_ids'], 
+    #                           class_names, scores = r['scores'], filename = 'test.jpg', colors= [(0.2, 0.2, 0.95)]*100, figsize=(12, 12), show_mask=True, show_bbox=True)
+  # origial image
+    # img = bridge.cv2_to_imgmsg(masked_image, "rgb8")
+    # img_pub.publish(img)
     return r['rois']
 
 
 pub = rospy.Publisher('Detection', Int16MultiArray, queue_size=1)
+# img_pub = rospy.Publisher('detection_img', Image, queue_size=1)
 bridge = CvBridge()
 
 def color_callback(image_msg):
@@ -71,7 +85,7 @@ def color_callback(image_msg):
   bboxes = detect(image)
   bbox_msg = Int16MultiArray()
   bbox_msg.data = bboxes.ravel()
-  # print(bbox_msg.data)
+  print(bbox_msg.data)
   pub.publish(bbox_msg)
 
 def depth_callback(depth_msg):
