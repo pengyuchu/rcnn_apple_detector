@@ -75,9 +75,8 @@ cd ..
 catkin build # It's not compatible with catkin_make
 cd .../src/rcnn_apple_detector/
 
-# download weights from 
-pip install gdown
-gdown https://drive.google.com/file/d/1Gnn6DjU51L_zjJtoURgt9VD5MahZp9D4/view?usp=sharing
+# download the weights model 
+wget https://github.com/bennie-msu/rcnn_apple_detector/releases/download/Model/model.h5
 
 # Setup it when you open a new session or echo it into .bashrc
 source setup.py # You should edit it and modify CATKIN_WORKSPACE to yours
