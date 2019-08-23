@@ -67,7 +67,7 @@ def detect(img):
     print('\nResult: ----------------')
     duration = time.time() - start;
     print('The detection time is: %.2fs' % (duration))
-    print('The count of apples is ', len(r['class_ids']))]
+    print('The count of apples is ', len(r['class_ids']))
     # masked_image = visualize.save_instances(img, r['rois'], r['masks'], r['class_ids'], 
     #                           class_names, scores = r['scores'], filename = 'test.jpg', colors= [(0.2, 0.2, 0.95)]*100, figsize=(12, 12), show_mask=True, show_bbox=True)
   # origial image
