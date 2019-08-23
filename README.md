@@ -20,7 +20,7 @@ Build __cv_bridge__ for Python3
 # `python3-dev` and `python3-catkin-pkg-modules` is needed to build cv_bridge
 # `python3-numpy` and `python3-yaml` is cv_bridge dependencies
 # `ros-kinetic-cv-bridge` is needed to install a lot of cv_bridge deps. Probaply you already have it installed.
-sudo apt-get install python-catkin-tools python3-dev python3-catkin-pkg-modules python3-numpy python3-yaml ros-kinetic-cv-bridge
+sudo apt-get install python-catkin-tools python3-dev python3-catkin-pkg-modules python3-numpy python3-yaml
 # Create catkin workspace
 mkdir catkin_ws
 cd catkin_ws
@@ -53,11 +53,14 @@ Install Mask RCNN
 
 ```shell
 git clone https://github.com/matterport/Mask_RCNN.git
-cd Mask_RCNN && pip3 install -r requirements.txt
-cd Mask_RCNN && python3 setup.py install
+cd Mask_RCNN 
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 2️⃣ Environment Setup
+
+[Optional] If you use all of packages in the same device, you don't need to setup this.
 
 ```shell
 # Ensure use the same master in the LAN.
@@ -73,15 +76,15 @@ cd ~/catkin_ws/src
 git clone https://github.com/bennie-msu/rcnn_apple_detector.git
 cd ..
 catkin build # It's not compatible with catkin_make
-cd .../src/rcnn_apple_detector/
+cd .../src/rcnn_apple_detector/weights
 
 # download the weights model 
 wget https://github.com/bennie-msu/rcnn_apple_detector/releases/download/Model/model.h5
-
+cd .. # go back to the rcnn_apple_detector directionary
 # Setup it when you open a new session or echo it into .bashrc
 source setup.py # You should edit it and modify CATKIN_WORKSPACE to yours
 
-# Run
+# Run in the rcnn_apple_detector dir
 roscore # in another session
 rosrun rcnn_apple_detector detection.py
 ```
