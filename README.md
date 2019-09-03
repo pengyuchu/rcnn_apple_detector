@@ -23,7 +23,7 @@ sudo apt-get install python-catkin-tools python3-dev python3-catkin-pkg-modules 
 # Create catkin workspace
 mkdir catkin_ws
 cd catkin_ws
-# sudo apt-get install ros-kinetic-catkin python-catkin-tools
+# sudo apt-get install ros-kinetic-catkin python-catkin-pkg
 mkdir src build devel logs
 catkin init
 # Instruct catkin to set cmake variables
@@ -33,14 +33,19 @@ catkin config --install
 # Clone cv_bridge src
 git clone https://github.com/ros-perception/vision_opencv.git src/vision_opencv
 # Find version of cv_bridge in your repository: your_version
-apt-cache show ros-kinetic-cv-bridge | grep Version
+# apt-cache show ros-kinetic-cv-bridge | grep Version
 # Checkout right version in git repo
 # cd src/vision_opencv/
 # git checkout your_version
 # cd ../../
 # Build
-# make sure 'apt-get install python3-catkin-pkg' is done, not only python-catkin-pkg
 catkin build cv_bridge
+# if boost python3 errors, modify src/vision_opencv/cv_bridge/CMakeLists.txt 
+# find_package(Boost REQUIRED python3)
+# to
+# find_package(Boost REQUIRED python-py35)
+# And then rebuild it
+
 # Extend environment with new package
 source install/setup.bash --extend
 
