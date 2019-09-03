@@ -91,6 +91,7 @@ source setup.bash # You should edit it and modify CATKIN_WORKSPACE to yours
 # Run in the rcnn_apple_detector dir
 roscore # in another session
 rosrun rcnn_apple_detector detection.py
+# Make sure PYTHONPATH contains your system python3/package-sites (where you install opencv-python)
 ```
 
 Now It's done 😊😊😊
