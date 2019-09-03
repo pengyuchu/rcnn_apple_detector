@@ -80,7 +80,7 @@ cd ~/catkin_ws/src
 git clone https://github.com/bennie-msu/rcnn_apple_detector.git
 cd ..
 catkin build # It's not compatible with catkin_make
-cd .../src/rcnn_apple_detector/weights
+cd src/rcnn_apple_detector/weights
 
 # download the weights model 
 wget https://github.com/bennie-msu/rcnn_apple_detector/releases/download/Model/model.h5
