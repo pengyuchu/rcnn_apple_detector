@@ -86,7 +86,7 @@ cd src/rcnn_apple_detector/weights
 wget https://github.com/bennie-msu/rcnn_apple_detector/releases/download/Model/model.h5
 cd .. # go back to the rcnn_apple_detector directionary
 # Setup it when you open a new session or echo it into .bashrc
-source setup.py # You should edit it and modify CATKIN_WORKSPACE to yours
+source setup.bash # You should edit it and modify CATKIN_WORKSPACE to yours
 
 # Run in the rcnn_apple_detector dir
 roscore # in another session
