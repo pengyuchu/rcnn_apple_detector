@@ -1,5 +1,4 @@
 # rcnn_apple_detector pkg
-
 > MSU apple detection project. 
 > Detection module.
 
@@ -24,6 +23,8 @@ sudo apt-get install python-catkin-tools python3-dev python3-catkin-pkg-modules 
 # Create catkin workspace
 mkdir catkin_ws
 cd catkin_ws
+# sudo apt-get install ros-kinetic-catkin python-catkin-tools
+mkdir src build devel logs
 catkin init
 # Instruct catkin to set cmake variables
 catkin config -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
@@ -34,10 +35,11 @@ git clone https://github.com/ros-perception/vision_opencv.git src/vision_opencv
 # Find version of cv_bridge in your repository: your_version
 apt-cache show ros-kinetic-cv-bridge | grep Version
 # Checkout right version in git repo
-cd src/vision_opencv/
-git checkout your_version
-cd ../../
+# cd src/vision_opencv/
+# git checkout your_version
+# cd ../../
 # Build
+# make sure 'apt-get install python3-catkin-pkg' is done, not only python-catkin-pkg
 catkin build cv_bridge
 # Extend environment with new package
 source install/setup.bash --extend
