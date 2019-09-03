@@ -41,10 +41,7 @@ git clone https://github.com/ros-perception/vision_opencv.git src/vision_opencv
 # Build
 catkin build cv_bridge
 # if boost python3 errors, modify src/vision_opencv/cv_bridge/CMakeLists.txt 
-# find_package(Boost REQUIRED python3)
-# to
-# find_package(Boost REQUIRED python-py35)
-# And then rebuild it
+# Follow https://stackoverflow.com/questions/49221565/unable-to-use-cv-bridge-with-ros-kinetic-and-python3
 
 # Extend environment with new package
 source install/setup.bash --extend
