@@ -92,6 +92,9 @@ source setup.bash # You should edit it and modify CATKIN_WORKSPACE to yours
 roscore # in another session
 rosrun rcnn_apple_detector detection.py
 # Make sure PYTHONPATH contains your system python3/package-sites (where you install opencv-python)
+# export PYTHONPATH=$PYTHONPATH:~/.local/lib/python3.5/sites-package
+
+# if you cannot import rospy or rospkg, follow the instructions on the ros website to install all of python essentials.
 ```
 
 Now It's done 😊😊😊
