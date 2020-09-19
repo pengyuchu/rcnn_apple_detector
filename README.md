@@ -33,11 +33,12 @@ catkin config --install
 # Clone cv_bridge src
 git clone https://github.com/ros-perception/vision_opencv.git src/vision_opencv
 # Find version of cv_bridge in your repository: your_version
-# apt-cache show ros-kinetic-cv-bridge | grep Version
+apt-cache show ros-kinetic-cv-bridge | grep Version
+# display YOUR_VERSION (like 1.1.12)
 # Checkout right version in git repo
-# cd src/vision_opencv/
-# git checkout your_version
-# cd ../../
+cd src/vision_opencv/
+git checkout YOUR_VERSION
+cd ../../
 # Build
 catkin build cv_bridge
 # if boost python3 errors, modify src/vision_opencv/cv_bridge/CMakeLists.txt 
@@ -95,6 +96,7 @@ rosrun rcnn_apple_detector detection.py
 # export PYTHONPATH=$PYTHONPATH:~/.local/lib/python3.5/sites-package
 
 # if you cannot import rospy or rospkg, follow the instructions on the ros website to install all of python essentials.
+sudo pip3 install rospkg catkin_pkg
 ```
 
 Now It's done 😊😊😊
